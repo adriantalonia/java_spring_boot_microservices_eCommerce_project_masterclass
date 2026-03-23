@@ -1,6 +1,7 @@
 package com.atrdev.ecomapp.modules.user.controller;
 
-import com.atrdev.ecomapp.modules.user.entity.User;
+import com.atrdev.ecomapp.modules.user.dto.UserRequest;
+import com.atrdev.ecomapp.modules.user.dto.UserResponse;
 import com.atrdev.ecomapp.modules.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,22 +22,22 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<User>> getUsers() {
+    public ResponseEntity<List<UserResponse>> getUsers() {
         return ResponseEntity.ok(userService.fetchAllUsers());
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest user) {
         return ResponseEntity.ok(userService.createUser(user));
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<User> getUser(@PathVariable Long userId) {
+    public ResponseEntity<UserResponse> getUser(@PathVariable Long userId) {
         return ResponseEntity.ok(userService.fetchUserById(userId));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
+    public ResponseEntity<UserResponse> updateUser(@PathVariable Long id, @RequestBody UserRequest user) {
         return ResponseEntity.ok(userService.updateUser(id, user));
     }
 

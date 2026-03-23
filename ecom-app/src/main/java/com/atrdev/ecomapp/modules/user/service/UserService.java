@@ -1,12 +1,13 @@
 package com.atrdev.ecomapp.modules.user.service;
 
-import com.atrdev.ecomapp.modules.user.entity.User;
+import com.atrdev.ecomapp.modules.user.dto.UserRequest;
+import com.atrdev.ecomapp.modules.user.dto.UserResponse;
 
 import java.util.List;
 
 public interface UserService {
-    List<User> fetchAllUsers();
-    User createUser(User user);
-    User fetchUserById(Long id);
-    User updateUser(Long id, User user);
+    List<UserResponse> fetchAllUsers();
+    UserResponse createUser(UserRequest user);
+    UserResponse fetchUserById(Long id);
+    UserResponse updateUser(Long id, UserRequest user);
 }
