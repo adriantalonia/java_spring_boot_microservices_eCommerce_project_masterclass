@@ -28,6 +28,9 @@
     </scm>
     <properties>
         <java.version>23</java.version>
+        <lombok.version>1.18.36</lombok.version>
+    <org.mapstruct.version>1.6.3</org.mapstruct.version>
+    <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
     </properties>
     <dependencies>
         <dependency>
@@ -53,6 +56,12 @@
             <artifactId>spring-boot-h2console</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${org.mapstruct.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -62,11 +71,30 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <annotationProcessorPaths>
+                        <!-- 3. Lombok PRIMERO — genera getters/setters que MapStruct necesita leer -->
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                        <!-- 4. Binding — garantiza el orden de procesamiento entre Lombok y MapStruct -->
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok-mapstruct-binding</artifactId>
+                            <version>${lombok-mapstruct-binding.version}</version>
+                        </path>
+                        <!-- 5. MapStruct ÚLTIMO — lee los getters/setters ya generados por Lombok -->
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${org.mapstruct.version}</version>
                         </path>
                     </annotationProcessorPaths>
+                    <!-- 6. Configura spring como modelo de componente global -->
+                    <compilerArgs>
+                        <arg>-Amapstruct.defaultComponentModel=spring</arg>
+                        <arg>-Amapstruct.unmappedTargetPolicy=WARN</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
             <plugin>
