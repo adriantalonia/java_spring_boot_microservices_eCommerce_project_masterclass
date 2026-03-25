@@ -1,4 +1,4 @@
-package com.atrdev.ecomapp.modules.user.exception;
+package com.atrdev.ecomapp.shared.exception;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -11,7 +11,7 @@ import java.net.URI;
 import java.time.Instant;
 
 @RestControllerAdvice
-public class UserExceptionHandler {
+public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ProblemDetail> handleResourceNotFound(

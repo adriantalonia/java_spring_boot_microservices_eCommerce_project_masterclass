@@ -1,4 +1,4 @@
-package com.atrdev.ecomapp.modules.user.exception;
+package com.atrdev.ecomapp.shared.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
     private final String resourceName;

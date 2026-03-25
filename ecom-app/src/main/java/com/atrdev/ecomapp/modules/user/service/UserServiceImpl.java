@@ -5,7 +5,7 @@ import com.atrdev.ecomapp.modules.user.dto.UserRequest;
 import com.atrdev.ecomapp.modules.user.dto.UserResponse;
 import com.atrdev.ecomapp.modules.user.entity.Address;
 import com.atrdev.ecomapp.modules.user.entity.User;
-import com.atrdev.ecomapp.modules.user.exception.ResourceNotFoundException;
+import com.atrdev.ecomapp.shared.exception.ResourceNotFoundException;
 import com.atrdev.ecomapp.modules.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
