@@ -2,6 +2,7 @@ package com.atrdev.ecomapp.modules.product.service;
 
 import com.atrdev.ecomapp.modules.product.dto.ProductRequest;
 import com.atrdev.ecomapp.modules.product.dto.ProductResponse;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -11,4 +12,8 @@ public interface ProductService {
     ProductResponse updateProduct(Long id, ProductRequest productRequest);
 
     List<ProductResponse> getAllProducts();
+
+    void deleteProduct(Long id);
+
+    List<ProductResponse> searchProducts(String keyword);
 }
