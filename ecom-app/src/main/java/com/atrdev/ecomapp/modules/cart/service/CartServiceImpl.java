@@ -45,8 +45,21 @@ public class CartServiceImpl implements CartService {
                 .map(existing ->  updateExistingCartItem(existing, product, quantity))
                 .orElseGet(() -> createNewCartItem(user, product, quantity));
 
-
         return cartMapper.toCartItemResponse(cartRepository.save(cartItem));
+    }
+
+    @Override
+    @Transactional
+    public void deleteItemFromCart(String userId, String productId) {
+        final Long productLongId = Long.valueOf(productId);
+        final Long userLongId = Long.valueOf(userId);
+        Product product = productRepository.findById(productLongId)
+                .orElseThrow(() -> new ResourceNotFoundException("Product", productLongId));
+
+        User user = userRepository.findById(userLongId)
+                .orElseThrow(() -> new ResourceNotFoundException("User", userLongId));
+
+        cartRepository.deleteByUserAndProduct(user, product);
     }
 
     private CartItem updateExistingCartItem(CartItem existing, Product product, int quantity) {
