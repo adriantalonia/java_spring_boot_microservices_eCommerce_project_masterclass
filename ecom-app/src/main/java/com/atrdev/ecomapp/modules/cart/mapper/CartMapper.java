@@ -5,6 +5,8 @@ import com.atrdev.ecomapp.modules.cart.entity.CartItem;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper
 public interface CartMapper {
 
@@ -14,4 +16,6 @@ public interface CartMapper {
     @Mapping(source = "product.name", target = "productName")
     @Mapping(source = "product.description", target = "productDescription")
     CartItemResponse toCartItemResponse(CartItem cartItem);
+
+    List<CartItemResponse> toCartItemResponses(List<CartItem> cartItems);
 }

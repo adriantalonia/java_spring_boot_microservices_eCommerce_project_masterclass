@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -60,6 +61,14 @@ public class CartServiceImpl implements CartService {
                 .orElseThrow(() -> new ResourceNotFoundException("User", userLongId));
 
         cartRepository.deleteByUserAndProduct(user, product);
+    }
+
+    @Override
+    public List<CartItemResponse> getCart(String userId) {
+        final Long userLongId = Long.valueOf(userId);
+        User user = userRepository.findById(userLongId)
+                .orElseThrow(() -> new ResourceNotFoundException("User", userLongId));
+        return cartMapper.toCartItemResponses(cartRepository.findByUser(user));
     }
 
     private CartItem updateExistingCartItem(CartItem existing, Product product, int quantity) {
